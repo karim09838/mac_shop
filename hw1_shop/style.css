@@ -1,0 +1,264 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* header ---------------*/
+.container {
+    margin: 0 238px;
+}
+
+.top {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.top_left{
+    display: flex;
+    align-items: center;
+}
+
+.top_right {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px black;
+    border-radius: 30px;
+    transition: all ease .2s;
+}
+.top_right:hover{
+    border: solid 1px #767272;
+    cursor: pointer;
+}
+
+.cart {
+    width: 20px;
+    height: 20px;
+    /* position: absolute; */
+    fill: #000;
+    transition: all ease .2s;
+
+}
+
+.top_right:hover .cart {
+    fill: #767272;
+    cursor: pointer;
+    
+}
+
+
+
+/* body-------------- */
+/* banner------------ */
+.banner {
+    height: 520px;
+    background-image: url(img/banners/ipad_air_banner.jpg);
+    /* background-size: cover; */
+    background-position: 50% 50%;
+    /* padding-top: 10px; */
+}
+
+.banner_name {
+
+    font-size: 72px;
+    color: #fff;
+    text-align: center;
+    line-height: 84px;
+    padding-top: 181px;
+}
+
+.btn{
+    transform: translate(-50%, 0px);
+    margin-left: 50%;
+    margin-top: 10px;
+    width: 150px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0E49B5;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+    font-size: 20px;
+    font-weight: 400;
+    box-shadow: 3px 3px 5px rgb(0 0 0 / 15%);
+    transition: all .5s linear;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #2b43f8;
+    cursor: pointer;
+}
+
+.search{
+
+    font-size: 18px;
+    padding-top: 32px;
+}
+.search form{
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    border: #dddada solid 1px;
+    box-shadow: 5px 5px 10px rgb(0 0 0 / 15%);
+}
+
+.search input, .search button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.search input {
+  width: 100%;
+  height: 60px;
+  padding-left: 25px;
+  font-size: 18px;
+  
+}
+.search button:first-child{
+  margin-left: 23px;
+  height: 30px;
+  width: 30px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  fill: #767272;
+
+}
+
+.filter_btn{
+    fill: #fff;
+background-color: #0E49B5;
+width: 30px;
+height: 30px;
+border-radius: 30px;
+transition: all ease .2s;
+padding: 5px;
+}
+
+.filter_btn:hover{
+    background-color: #fff;
+    fill: #000;
+    cursor: pointer;
+}
+
+/* products--------- */
+.products{
+    max-width: 1028px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.product_item{
+    min-width: 300px;
+    position: relative;
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: #DDDADA solid 1px;
+    border-radius: 7px;
+    box-shadow: 0 0 10px #dddada;
+    margin-bottom: 40px;
+}
+
+.header_product {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 20px;
+	right: 20px;
+	text-align: right;
+}
+
+.like {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 20px;
+	bottom: 20px;
+	right: 20px;
+	text-align: right;
+}
+
+.likeborder {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: 20px;
+	right: 20px;
+	text-align: right;
+}
+
+.img_product{
+	width: 100%;
+	text-align: center;
+}
+
+.content_product{
+	width: 100%;
+	padding: 10px 10px;
+	text-align: center;
+}
+
+.check{
+    border: #1bc943 1px solid;
+    border-radius: 30px;
+}
+
+
+
+
+.btn_disabled {
+	transform: translate(-50%, 0px);
+    margin-left: 50%;
+    margin-top: 10px;
+    width: 150px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #ddd;
+    color: #fff;
+    text-align: center;
+    line-height: 23px;
+    font-size: 20px;
+    font-weight: 400;
+    box-shadow: 3px 3px 5px rgb(0 0 0 / 15%);
+    transition: all .5s linear;
+    border: none;
+}
+
+.footer_product {
+	width: 100%;
+	background-color: #DAE2EA; 
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 10px 20px;
+	border-radius: 7px;
+}
+
+.footer_img {
+	width: 20px;
+	height: 37px;
+    fill: red;
+}
+
+
+@media (max-width: 1115px) { 
+    .products{
+        justify-content: center;
+    }
+}
