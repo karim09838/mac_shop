@@ -1271,3 +1271,88 @@ const items = [
         }
     },
 ];
+
+
+let itemsContainer = document.getElementById("items");
+
+let card = document.getElementById("card");
+itemsContainer.innerHTML = "";
+items.map(item=>{
+
+let newElement = document.createElement("div");
+    newElement.classList.add("product_item")
+
+
+  let imgcard = card.getElementsByClassName("img_card");
+    imgcard[0].src = item.imgUrl;
+
+  let header = card.getElementsByClassName("content_product");
+    header[0].textContent = item.name;
+    
+  let check =card.getElementsByClassName("check");
+  if (item.orderInfo.inStock<=0) {
+      check[0].src="img/icons/close.svg"
+      check[0].style.border="none"
+
+  }
+  else{
+      check[0].src="img/icons/check.svg"
+      check[0].style.padding="2px"
+      check[0].style.width="20px"
+      check[0].style.border="#1bc943 2px solid"
+      check[0].style.borderRadius="50%"
+  }
+
+    let count = card.getElementsByClassName("count_in_stock");
+    count[0].textContent = item.orderInfo.inStock+" left in stock";
+    count[0].innerHTML+="<br>"
+
+    let price = card.getElementsByClassName("price")
+    price[0].textContent="Price: "+item.price+"$"
+
+    let btn = card.getElementsByClassName("btn")
+    if (item.orderInfo.inStock<=0) {
+        btn[0].style.backgroundColor="grey"
+        btn[0].style.cursor="default"
+    }
+    else{
+        btn[0].style.backgroundColor="#0E49B5"
+        btn[0].style.cursor="pointer"
+    }
+
+    let percent = card.getElementsByClassName("percent");
+    percent[0].textContent=item.orderInfo.reviews
+
+    let order = card.getElementsByClassName("order");
+    order[0].textContent= Math.trunc(Math.random()*10000)
+    
+    
+    newElement.innerHTML = card.innerHTML;
+    itemsContainer.appendChild(newElement);
+})
+
+function like($this) {
+    let path=$this.src.slice($this.src.indexOf("img/icons/"))
+    // console.log($this.src);
+    
+    if (path=="img/icons/like_empty.svg") {
+        $this.src = "img/icons/like.svg"
+        console.log();
+    }
+    else{
+        $this.src = "img/icons/like_empty.svg"
+    }
+}
+
+let flag=0
+function btn_filter() {
+    let filter= document.getElementById("filter");
+    filter.style.display="none"
+
+    if (flag%2==0) {
+        filter.style.display="block"
+    }
+    else filter.style.display="none"
+    flag++
+    
+}
