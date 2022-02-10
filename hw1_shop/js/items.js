@@ -1276,61 +1276,75 @@ const items = [
 let itemsContainer = document.getElementById("items");
 
 let card = document.getElementById("card");
-itemsContainer.innerHTML = "";
-items.map(item=>{
-
-let newElement = document.createElement("div");
-    newElement.classList.add("product_item")
 
 
-  let imgcard = card.getElementsByClassName("img_card");
-    imgcard[0].src = item.imgUrl;
+function rewrite(arr) {
+    itemsContainer.innerHTML = ""; 
+    let arr_add=[]
+    arr.map(item=>{
+    let flag=false
 
-  let header = card.getElementsByClassName("content_product");
-    header[0].textContent = item.name;
-    
-  let check =card.getElementsByClassName("check");
-  if (item.orderInfo.inStock<=0) {
-      check[0].src="img/icons/close.svg"
-      check[0].style.border="none"
+    for(let i=0;i<arr_add.length;i++){
+        if(item.id==arr_add[i]){
+            flag=true
+        }
+    }
+    if(flag==true)return
+    else arr_add.push(item.id)
 
-  }
-  else{
-      check[0].src="img/icons/check.svg"
-      check[0].style.padding="2px"
-      check[0].style.width="20px"
-      check[0].style.border="#1bc943 2px solid"
-      check[0].style.borderRadius="50%"
-  }
+    let newElement = document.createElement("div");
+        newElement.classList.add("product_item")
 
-    let count = card.getElementsByClassName("count_in_stock");
-    count[0].textContent = item.orderInfo.inStock+" left in stock";
-    count[0].innerHTML+="<br>"
 
-    let price = card.getElementsByClassName("price")
-    price[0].textContent="Price: "+item.price+"$"
+    let imgcard = card.getElementsByClassName("img_card");
+        imgcard[0].src = item.imgUrl;
 
-    let btn = card.getElementsByClassName("btn")
+    let header = card.getElementsByClassName("content_product");
+        header[0].textContent = item.name;
+        
+    let check =card.getElementsByClassName("check");
     if (item.orderInfo.inStock<=0) {
-        btn[0].style.backgroundColor="grey"
-        btn[0].style.cursor="default"
+        check[0].src="img/icons/close.svg"
+        check[0].style.border="none"
+
     }
     else{
-        btn[0].style.backgroundColor="#0E49B5"
-        btn[0].style.cursor="pointer"
+        check[0].src="img/icons/check.svg"
+        check[0].style.padding="2px"
+        check[0].style.width="20px"
+        check[0].style.border="#1bc943 2px solid"
+        check[0].style.borderRadius="50%"
     }
 
-    let percent = card.getElementsByClassName("percent");
-    percent[0].textContent=item.orderInfo.reviews
+        let count = card.getElementsByClassName("count_in_stock");
+        count[0].textContent = item.orderInfo.inStock+" left in stock";
+        count[0].innerHTML+="<br>"
 
-    let order = card.getElementsByClassName("order");
-    order[0].textContent= Math.trunc(Math.random()*10000)
-    
-    
-    newElement.innerHTML = card.innerHTML;
-    itemsContainer.appendChild(newElement);
-})
+        let price = card.getElementsByClassName("price")
+        price[0].textContent="Price: "+item.price+"$"
 
+        let btn = card.getElementsByClassName("btn")
+        if (item.orderInfo.inStock<=0) {
+            btn[0].style.backgroundColor="grey"
+            btn[0].style.cursor="default"
+        }
+        else{
+            btn[0].style.backgroundColor="#0E49B5"
+            btn[0].style.cursor="pointer"
+        }
+
+        let percent = card.getElementsByClassName("percent");
+        percent[0].textContent=item.orderInfo.reviews
+
+        let order = card.getElementsByClassName("order");
+        order[0].textContent= Math.trunc(Math.random()*10000)
+        
+        
+        newElement.innerHTML = card.innerHTML;
+        itemsContainer.appendChild(newElement);
+    })
+}
+rewrite(items)
 function like($this) {
     let path=$this.src.slice($this.src.indexOf("img/icons/"))
     // console.log($this.src);
@@ -1344,15 +1358,162 @@ function like($this) {
     }
 }
 
-let flag=0
 function btn_filter() {
     let filter= document.getElementById("filter");
-    filter.style.display="none"
 
-    if (flag%2==0) {
+    if (filter.style.display=="none" || filter.style.display=="") {
         filter.style.display="block"
     }
     else filter.style.display="none"
-    flag++
+}
+
+
+function filter($this,i) {
+    let filter=document.getElementsByClassName("filter_info")
+    let img=$this.getElementsByTagName("img")
+
+    if (filter[i].style.display=="none" || filter[i].style.display=="") {
+        img[0].style.transition="all .2s linear"
+        img[0].style.transform="rotate(90deg)"
+        filter[i].style.display="flex"
+    }
+    else {
+        filter[i].style.display="none"
+        img[0].style.transform="rotate(0deg)"
+    }
+}
+
+
+function search() {
+    let str=document.getElementById("search").value;
+    let tmp=[];
+    for (let i = 0; i < items.length; i++) {
+        let a= str.toLowerCase()
+        let b=items[i].name.toLowerCase()
+           if (b.indexOf(a)>=0) {
+               tmp.push(items[i])
+           }
+    }
+    console.log(tmp)
+
+        rewrite(tmp)
+        return tmp
+}
+
+
+
+
+let arr_color=[]
+function color($this){
+    let value=$this.value
     
+    if($this.checked==true)
+    {
+        for (let i = 0; i < items.length; i++) {
+            for(let j=0;j<items[i].color.length;j++){
+                if(items[i].color[j]==value){
+                    arr_color.push(items[i])
+                }
+            }        
+        }
+    }
+
+    else 
+    {
+            
+            let tmp_del=[]
+            for (let j = 0; j < arr_color.length; j++) {
+                let flag=false
+                let index=arr_color[j].color.indexOf(value)
+                
+                for(let i = 0; i<tmp_del.length;i++){
+                    if(tmp_del[i].id==arr_color[j].id)flag=true
+                }
+
+                if(index>=0 && flag==false){
+                    tmp_del.push(arr_color[j])
+                    arr_color.splice(j,1)
+                    j--;
+                }
+                
+            }  
+        
+    }
+    // console.log(arr_color)
+    rewrite(arr_color)
+}
+
+let arr_storage=[]
+function memory($this){
+    let value=$this.value
+    
+    if($this.checked==true)
+    {
+        for (let i = 0; i < items.length; i++) {
+            if(items[i].storage==value){
+                arr_storage.push(items[i])
+            }       
+        }
+    }
+
+    else 
+    {
+            
+            let tmp_del=[]
+            for (let j = 0; j < arr_storage.length; j++) {
+                let flag=false
+
+                
+                for(let i = 0; i<tmp_del.length;i++){
+                    if(tmp_del[i].id==arr_storage[j].id)flag=true
+                }
+
+                if(arr_storage[j].storage==value && flag==false){
+                    tmp_del.push(arr_storage[j])
+                    arr_storage.splice(j,1)
+                    j--;
+                }
+                
+            }  
+        
+    }
+    rewrite(arr_storage)
+}
+
+
+let arr_os=[]
+function os($this){
+    let value=$this.value
+    
+    if($this.checked==true)
+    {
+        for (let i = 0; i < items.length; i++) {
+            if(items[i].os==value){
+                arr_os.push(items[i])
+            }       
+        }
+    }
+
+    else 
+    {
+            
+            let tmp_del=[]
+            for (let j = 0; j < arr_os.length; j++) {
+                let flag=false
+
+                
+                for(let i = 0; i<tmp_del.length;i++){
+                    if(tmp_del[i].id==arr_os[j].id)flag=true
+                }
+
+                if(arr_os[j].os==value && flag==false){
+                    tmp_del.push(arr_os[j])
+                    arr_os.splice(j,1)
+                    j--;
+                }
+                
+            }  
+        
+    }
+    rewrite(arr_os)
 }
