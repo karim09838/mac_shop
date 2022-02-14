@@ -1292,8 +1292,12 @@ function rewrite(arr) {
     if(flag==true)return
     else arr_add.push(item.id)
 
+
     let newElement = document.createElement("div");
         newElement.classList.add("product_item")
+
+    let card_id=card.getElementsByClassName("card_id");
+    card_id[0].value=item.id
 
 
     let imgcard = card.getElementsByClassName("img_card");
@@ -1516,4 +1520,91 @@ function os($this){
         
     }
     rewrite(arr_os)
+}
+
+let arr_display=[]
+function display($this){
+    let value=$this.value.split("-")
+    
+    if($this.checked==true)
+    {
+        for (let i = 0; i < items.length; i++) {
+            if(items[i].display>=value[0] && items[i].display<value[1]){
+                arr_display.push(items[i])
+            }       
+        }
+    }
+
+    else 
+    {
+            
+            let tmp_del=[]
+            for (let j = 0; j < arr_display.length; j++) {
+                let flag=false
+
+                
+                for(let i = 0; i<tmp_del.length;i++){
+                    if(tmp_del[i].id==arr_display[j].id)flag=true
+                }
+
+                if(arr_display[j].display>=value[0] && arr_display[j].display<value[1] && flag==false){
+                    tmp_del.push(arr_display[j])
+                    arr_display.splice(j,1)
+                    j--;
+                }
+                
+            }  
+        
+    }
+    rewrite(arr_display)
+}
+
+
+let modal_window = document.getElementById("modal_window");
+
+let modal = document.getElementById("modal");
+
+function mw($this) {
+    let id=$this.getElementsByClassName("card_id")
+    id=id[0].value
+    console.log(id);
+    let tmp
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].id==id) {
+            tmp=items[i]
+            break
+        }
+    }
+    // modal.innerHTML = "";
+
+    let img=modal.getElementsByClassName("modal_img");
+    img[0].src = tmp.imgUrl;
+
+    let name=modal.getElementsByClassName("middle_top");
+    name[0].textContent=tmp.name;
+
+    let text=modal.getElementsByClassName("percent");
+    text[0].textContent=tmp.orderInfo.reviews;
+
+    let order = modal.getElementsByClassName("order");
+    order[0].textContent= Math.trunc(Math.random()*10000);
+
+    let characteristic= modal.getElementsByTagName("p");
+    characteristic[2].innerHTML="<span>Color: </span>"+tmp.color.join();
+    characteristic[3].innerHTML="<span>Operating System: </span>"+tmp.os;
+    characteristic[4].innerHTML="<span>Chip: </span>"+tmp.chip.name;
+    characteristic[5].innerHTML="<span>Height: </span>"+tmp.size.height;
+    characteristic[6].innerHTML="<span>Width: </span>"+tmp.size.width;
+    characteristic[7].innerHTML="<span>Depth: </span>"+tmp.size.depth;
+    characteristic[8].innerHTML="<span>Weight: </span>"+tmp.size.weight;
+
+
+    let price=modal.getElementsByClassName("modal_price");
+    price[0].textContent=tmp.price+"$";
+
+
+    let stock=modal.getElementsByClassName("modal_stock");
+    stock[0].innerHTML="Stock: <b>"+tmp.orderInfo.inStock+"</b> pcs";
+    
+    modal_window.style.display="block";
 }

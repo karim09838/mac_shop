@@ -226,10 +226,7 @@ margin: 0 5px;
 	text-align: center;
 }
 
-.check{
-    /* border: #1bc943 1px solid;
-    border-radius: 30px; */
-}
+
 
 
 
@@ -273,9 +270,7 @@ img.img_card {
     height:200px
         
 }
-.count_in_stock{
-    
-}
+
 .price{
     font-weight: bold;
 }
@@ -348,8 +343,120 @@ border-radius: 4px;
     display: none;
 }
 
+
+/* modalwin--------- */
+
+
+.modal_window{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+ }
+ .modal {
+    background: white;
+    max-width: 1020px;
+    height: 491px;
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    display: flex;
+    /* flex-wrap: wrap; */
+    border-radius: 0.5rem;
+
+ }
+ .modal_left {
+    height: 100%;
+    /* width: 294px; */
+    padding: 0 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;  
+ }
+ .device-img {
+    width: 250px;
+    height: 250px;
+    margin: auto auto;
+    object-fit: contain;
+ }
+ .modal_middle{
+    width: 441px;
+    border-left: 1px solid #E2E2E2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+ .middle_top{
+    width: 300px;
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: bold;
+ }
+ .middle_cente{
+    height: 86px;
+     width: 300px;
+     position: relative;
+     padding: 20px;
+     background: #DAE2EA;
+     border-radius: 10px;
+     display: flex;
+     justify-content: space-between;
+     margin: 20px auto;
+     color: #3B3E66;    
+ }
+ 
+ .middle_cente p {
+    /* text-align: center; */
+    padding-left: 13px;
+    line-height: 1.5;
+ }
+ 
+ .middle_bottom {
+    width: 300px;
+ }
+
+ .middle_bottom p{
+     padding-bottom: 15px;
+ }
+ .middle_bottom p span{
+     color: #767272;
+ }
+ 
+ .modal_right {
+    height: 100%;
+    width: 285px;
+    display: flex;
+    border-left: 1px solid #E2E2E2;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .modal_price {
+    color: #3B3E66;
+    font-size: 36px;
+    font-weight: bold;
+    padding-bottom: 27px;
+    text-shadow: 0px 3px 4px rgba(154, 150, 150, 1);
+ }
+ .modal_stock {
+    font-size: 18px;
+    color: #3B3E66;
+    padding-bottom: 30px;   
+ }
+
+ .modal_img{
+     width: 250px;
+     height: 250px;
+
+ }
 @media (max-width: 1115px) { 
     .products{
         justify-content: center;
     }
 }
+
