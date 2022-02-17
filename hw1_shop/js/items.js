@@ -1279,10 +1279,29 @@ let card = document.getElementById("card");
 
 
 function rewrite(arr) {
+
     itemsContainer.innerHTML = ""; 
     let arr_add=[]
+
+    if (arr.length==0){
+        arr=items
+    }
+
+
+    if (arr.length>=1) {
+       let from=document.getElementsByClassName("from");
+       let price=[]
+       for(let i=0;i<arr.length;i++)
+            price.push(arr[i].price)
+       from[0].value=Math.min(...price)
+
+       let to=document.getElementsByClassName("to");
+       to[0].value=Math.max(...price)
+    }
+
     arr.map(item=>{
     let flag=false
+
 
     for(let i=0;i<arr_add.length;i++){
         if(item.id==arr_add[i]){
@@ -1336,7 +1355,7 @@ function rewrite(arr) {
             btn[0].style.backgroundColor="#0E49B5"
             btn[0].style.cursor="pointer"
         }
-
+        
         let percent = card.getElementsByClassName("percent");
         percent[0].textContent=item.orderInfo.reviews
 
@@ -1345,7 +1364,9 @@ function rewrite(arr) {
         
         
         newElement.innerHTML = card.innerHTML;
+        newElement.onclick=card.onclick
         itemsContainer.appendChild(newElement);
+        
     })
 }
 rewrite(items)
@@ -1445,6 +1466,7 @@ function color($this){
     }
     // console.log(arr_color)
     rewrite(arr_color)
+    
 }
 
 let arr_storage=[]
@@ -1560,6 +1582,23 @@ function display($this){
 }
 
 
+
+
+function price(){
+    let arr_price=[]
+    let min_value=document.getElementsByClassName("from")[0].value
+    let max_value=document.getElementsByClassName("to")[0].value
+    
+        for (let i = 0; i < items.length; i++) {
+            if(items[i].price>=min_value && items[i].price<=max_value){
+                arr_price.push(items[i])
+            }       
+        }
+
+    
+    rewrite(arr_price)
+}
+
 let modal_window = document.getElementById("modal_window");
 
 let modal = document.getElementById("modal");
@@ -1607,4 +1646,16 @@ function mw($this) {
     stock[0].innerHTML="Stock: <b>"+tmp.orderInfo.inStock+"</b> pcs";
     
     modal_window.style.display="block";
+
+    // let bigInfo = card.querySelector("modal_window");
+    modal_window.addEventListener("click",()=>remove())
+    modal.addEventListener("click",(event)=>event.stopPropagation())
+
+
+    
+   
+}
+
+function remove() {
+    modal_window.style.display="none";
 }

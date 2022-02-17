@@ -329,6 +329,11 @@ img.img_card {
     display: flex;
     flex-wrap: wrap;
 }
+
+.filter_info_right input{
+    text-align: center;
+    color: #3B3E66;
+}
 .filter_info input{
 margin: 16px;
 padding: 5px;

@@ -44,7 +44,7 @@
                     IPad Air
                 </p>
 
-                <p class="btn" onclick="mw(2)">
+                <p class="btn">
                     Add to card
                 </p>
             </div>
@@ -142,8 +142,8 @@
                                 <p>To</p>
                             </span>
                             <span class="filter_info_right">
-                                <input type="text">
-                                <input type="text">
+                                <input type="text" class="from" onblur="price()" placeholder="min">
+                                <input type="text" class="to"  onblur="price()" placeholder="max">
                             </span>
                         </span>
                     <span class="filter_name" onclick="filter(this,1)">
@@ -220,14 +220,14 @@
                 
 
 
-                    <div id="card" class="product_item" >
+                    <div id="card" class="product_item" onclick="mw(this)">
                         <div class="header_product">
 
                             <img class="like" onclick="like(this)" src="img/icons/like_empty.svg" alt="like">
 
                         </div>
                         <div class="nameing">
-                            <div class="img_product" onclick="mw(this)">
+                            <div class="img_product" >
                                 <input type="hidden" class="card_id">
                                 <img class="img_card" src="" alt="tv">
                             </div>
@@ -265,7 +265,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal_window" id="modal_window">
+            <div class="modal_window" id="modal_window" onclick="">
                 <div class="modal" id="modal">
                   <div class="modal_left">
                     <img class="modal_img" src="items/apple-tv.jpeg" alt="Device image" class="device-img">
@@ -299,6 +299,7 @@
 
     <script src="js/items.js"></script>
 </body>
-
+<!--  keydown
+ onblur -->
 
 </html>
