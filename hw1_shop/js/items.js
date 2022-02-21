@@ -1350,10 +1350,14 @@ function rewrite(arr) {
         if (item.orderInfo.inStock<=0) {
             btn[0].style.backgroundColor="grey"
             btn[0].style.cursor="default"
+            let str = btn[0].outerHTML.replace("onclick=\"buy(this)\"", "")
+            btn[0].outerHTML=str
         }
         else{
             btn[0].style.backgroundColor="#0E49B5"
-            btn[0].style.cursor="pointer"
+            btn[0].style.cursor="pointer" 
+            let str = btn[0].outerHTML.replace("class=\"btn\"", "class=\"btn\" onclick=\"buy(this)\"")
+            btn[0].outerHTML=str      
         }
         
         let percent = card.getElementsByClassName("percent");
@@ -1366,10 +1370,31 @@ function rewrite(arr) {
         newElement.innerHTML = card.innerHTML;
         newElement.onclick=card.onclick
         itemsContainer.appendChild(newElement);
-        
+      
     })
+    if(arr.length==1){
+        likes.addEventListener("click", (event)=>event.stopPropagation())
+    }
+    else{
+        for (let i = 0; i < arr.length; i++) {
+            likes[i].addEventListener("click", (event)=>event.stopPropagation())
+        }
+    }
+    if(arr.length==1){
+        btn.addEventListener("click", (event)=>event.stopPropagation())
+    }
+    else{
+        for (let i = 0; i < arr.length; i++) {
+            btn[i].addEventListener("click", (event)=>event.stopPropagation())
+        }
+    }
 }
 rewrite(items)
+
+
+
+
+
 function like($this) {
     let path=$this.src.slice($this.src.indexOf("img/icons/"))
     // console.log($this.src);
@@ -1381,6 +1406,15 @@ function like($this) {
     else{
         $this.src = "img/icons/like_empty.svg"
     }
+}
+
+function basket() {
+    let filter= document.getElementById("basket_block");
+
+    if (filter.style.display=="none" || filter.style.display=="") {
+        filter.style.display="block"
+    }
+    else filter.style.display="none"
 }
 
 function btn_filter() {
@@ -1644,7 +1678,25 @@ function mw($this) {
 
     let stock=modal.getElementsByClassName("modal_stock");
     stock[0].innerHTML="Stock: <b>"+tmp.orderInfo.inStock+"</b> pcs";
+
+    let btn = modal.getElementsByClassName("btn")
+        if (tmp.orderInfo.inStock<=0) {
+            btn[0].style.backgroundColor="grey"
+            btn[0].style.cursor="default"
+         
+            let str = btn[0].outerHTML.replace("onclick=\"buy(this)\"", "")
+            btn[0].outerHTML=str
+        }
+        else{
+            btn[0].style.backgroundColor="#0E49B5"
+            btn[0].style.cursor="pointer"   
+            let str = btn[0].outerHTML.replace("class=\"btn\"", "class=\"btn\" onclick=\"buy(this)\"")
+            btn[0].outerHTML=str
+        }
     
+
+        let card_id=modal.getElementsByClassName("card_id");
+    card_id[0].value=tmp.id
     modal_window.style.display="block";
 
     // let bigInfo = card.querySelector("modal_window");
@@ -1659,3 +1711,95 @@ function mw($this) {
 function remove() {
     modal_window.style.display="none";
 }
+
+let basketContainer = document.getElementById("basket_body");
+
+let basket_middle = document.getElementById("basket_middle");
+basketContainer.innerHTML = "";
+
+
+function basket_block(arr_id) {
+    basketContainer.innerHTML = "";
+    let arr_add=[]
+
+    let arr=[]
+    for (let i = 0; i < items.length; i++) {
+       if (arr_id.indexOf(items[i].id)>=0) {
+           arr.push(items[i])
+           arr[arr.length-1].count=1
+       }
+    }
+
+
+    arr.map(basket=>{
+        let flag=false
+
+        for(let i=0;i<arr_add.length;i++){
+            if(basket.id==arr_add[i]){
+                flag=true
+            }
+        }
+        if(flag==true)return
+        else arr_add.push(basket.id)
+
+        let newBody = document.createElement("div");
+        newBody.classList.add("basket_middle")
+
+        let imgBasket = basket_middle.getElementsByClassName("basket_body_img");
+        imgBasket[0].src = basket.imgUrl;
+
+        let name = basket_middle.getElementsByClassName("basket_item_title");
+        name[0].textContent = basket.name;
+
+
+        let basket_price = basket_middle.getElementsByClassName("basket_item_price")
+        basket_price[0].innerHTML="<span>"+"$"+basket.price+"</span>"
+
+        let arrow_basket = basket_middle.getElementsByClassName("arrow_basket")
+        arrow_basket[0].innerHTML += "<input type='hidden' value="+basket.id+">" 
+        // arrow_basket[0].onclick=function(){
+        //     basket.count=basket.count-1
+        //     console.log(basket.count);
+        // }
+        let listener=function(){
+                basket.count=basket.count-1
+                console.log(basket.count);
+            }
+        arrow_basket[0].addEventListener('click',listener,false)
+        arrow_basket[1].innerHTML += "<input type='hidden' value="+basket.id+">"
+
+        let card_id=basket_middle.getElementsByClassName("card_id")
+        card_id[0].value=basket.id
+        
+       let item_quantity =basket_middle.getElementsByClassName("item_quantity")
+       item_quantity[0].textContent=basket.count
+
+
+        newBody.innerHTML = basket_middle.innerHTML;
+        basketContainer.appendChild(newBody);
+        
+    })
+    // console.log(arr);
+} 
+
+
+// basket_block(items)
+let basket_buy =[]
+function buy($this) {
+    let id=$this.getElementsByClassName("card_id");
+    if (basket_buy.indexOf(Number(id[0].value))== -1) {
+        basket_buy.push(Number(id[0].value))
+    }
+    
+    basket_block(basket_buy)
+}
+
+function btn_delete($this) {
+    let id=$this.getElementsByClassName("card_id")[0].value;
+    if (basket_buy.indexOf(Number(id))!==-1) {
+        basket_buy.splice(basket_buy.indexOf(Number(id)),1)
+    }
+    basket_block(basket_buy)
+    
+}
+
