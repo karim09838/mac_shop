@@ -21,7 +21,7 @@
                 <div class="top_left">
                     <img src="img/logo.svg" alt="#">
                 </div>
-                <div class="top_right">
+                <div class="top_right" id="basket" onclick="basket()" >
                     <svg class="cart" width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -40,6 +40,52 @@
     <section class="banner">
         <div class="container">
             <div class="banner">
+                <div class="basket_block" id="basket_block">
+                    <div class="basket" id="basket_all">
+                        <div class="basket_header">
+                            <div class="basket_container" id="basket_container">
+                                <h2>Shopping Cart</h2>
+                                <p>Checkout is almost done!</p>
+                            </div>
+                        </div>
+                        <div class="basket_body" id="basket_body">
+                            <div class="basket_middle" id="basket_middle">
+                                <img class="basket_body_img" src="items/airpods_pro.jpg" alt="basket img" >
+                                <div class="basket_item">
+                                    <h3 class="basket_item_title">Apple AirPods Pro</h3>
+                                    <p class="basket_item_price"><span>$600</span></p>
+                                </div>
+                                <div class="basket_item_add">
+                                    <span class="arrow_basket">
+                                        <img class="arrow_left" src="img/icons/arrow_left.svg" alt="Arrow left">
+                                    </span>
+                                    <p id="item_quantity" class="item_quantity">3</p>
+                                    <span class="arrow_basket">
+                                        <img class="arrow_right" src="img/icons/arrow_left.svg" alt="Arrow right">
+                                    </span>
+                                </div>
+                                <span onclick="btn_delete(this)">
+                                    <input type="hidden" class="card_id">
+                                    <img class="basket_item_delete" src="img/icons/close-basket.svg" alt="Delete icon">
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="basket_footer">
+                            <div class="basket_container">
+                                <div class="basket_footer_total">
+                                    <p id="basket_footer_total_pcs"><span class="total_am"> Total amount:</span>
+                                        <span><span class="total_pcs">3</span> pcs.</span></p>
+                                    <p id="basket_footer_total_price">Total price: <span><span
+                                                class="total_price">600</span>$</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="basket_btn">
+                            <button class="btn_buy">Buy</button>
+                        </div>
+                    </div>
+                </div>
                 <p class="banner_name">
                     IPad Air
                 </p>
@@ -52,11 +98,11 @@
 
     </section>
 
-    <section class="filter">
+    <section class="filter_all">
         <div class="container">
             <div class="search">
                 <form>
-                    <button type="submit">
+                    <span onclick="search()">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.005 512.005"
                             style="enable-background:new 0 0 512.005 512.005;" xml:space="preserve">
@@ -100,26 +146,26 @@
                             <g>
                             </g>
                         </svg>
-                    </button>
-                    <input type="text" placeholder="Enter device name...">
-                    <button class="filter">
-                        <svg class="filter_btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"
+                    </span>
+                    <input type="text" placeholder="Enter device name..." id="search">
+                    <span id="btn_filter" onclick="btn_filter()">
+                        <svg class="filter_btn " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"
                             width="18px" height="18px">
                             <path d="M0 0h24v24H0z" fill="none" />
                             <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" /></svg>
 
                         </svg>
-                    </button>
+                    </span>
 
-                    <button class="filter">
+                    <span>
                         <svg class="filter_btn" id="Layer_1" enable-background="new 0 0 512 512" height="512"
                             viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="m272.066 512h-32.133c-25.989 0-47.134-21.144-47.134-47.133v-10.871c-11.049-3.53-21.784-7.986-32.097-13.323l-7.704 7.704c-18.659 18.682-48.548 18.134-66.665-.007l-22.711-22.71c-18.149-18.129-18.671-48.008.006-66.665l7.698-7.698c-5.337-10.313-9.792-21.046-13.323-32.097h-10.87c-25.988 0-47.133-21.144-47.133-47.133v-32.134c0-25.989 21.145-47.133 47.134-47.133h10.87c3.531-11.05 7.986-21.784 13.323-32.097l-7.704-7.703c-18.666-18.646-18.151-48.528.006-66.665l22.713-22.712c18.159-18.184 48.041-18.638 66.664.006l7.697 7.697c10.313-5.336 21.048-9.792 32.097-13.323v-10.87c0-25.989 21.144-47.133 47.134-47.133h32.133c25.989 0 47.133 21.144 47.133 47.133v10.871c11.049 3.53 21.784 7.986 32.097 13.323l7.704-7.704c18.659-18.682 48.548-18.134 66.665.007l22.711 22.71c18.149 18.129 18.671 48.008-.006 66.665l-7.698 7.698c5.337 10.313 9.792 21.046 13.323 32.097h10.87c25.989 0 47.134 21.144 47.134 47.133v32.134c0 25.989-21.145 47.133-47.134 47.133h-10.87c-3.531 11.05-7.986 21.784-13.323 32.097l7.704 7.704c18.666 18.646 18.151 48.528-.006 66.665l-22.713 22.712c-18.159 18.184-48.041 18.638-66.664-.006l-7.697-7.697c-10.313 5.336-21.048 9.792-32.097 13.323v10.871c0 25.987-21.144 47.131-47.134 47.131zm-106.349-102.83c14.327 8.473 29.747 14.874 45.831 19.025 6.624 1.709 11.252 7.683 11.252 14.524v22.148c0 9.447 7.687 17.133 17.134 17.133h32.133c9.447 0 17.134-7.686 17.134-17.133v-22.148c0-6.841 4.628-12.815 11.252-14.524 16.084-4.151 31.504-10.552 45.831-19.025 5.895-3.486 13.4-2.538 18.243 2.305l15.688 15.689c6.764 6.772 17.626 6.615 24.224.007l22.727-22.726c6.582-6.574 6.802-17.438.006-24.225l-15.695-15.695c-4.842-4.842-5.79-12.348-2.305-18.242 8.473-14.326 14.873-29.746 19.024-45.831 1.71-6.624 7.684-11.251 14.524-11.251h22.147c9.447 0 17.134-7.686 17.134-17.133v-32.134c0-9.447-7.687-17.133-17.134-17.133h-22.147c-6.841 0-12.814-4.628-14.524-11.251-4.151-16.085-10.552-31.505-19.024-45.831-3.485-5.894-2.537-13.4 2.305-18.242l15.689-15.689c6.782-6.774 6.605-17.634.006-24.225l-22.725-22.725c-6.587-6.596-17.451-6.789-24.225-.006l-15.694 15.695c-4.842 4.843-12.35 5.791-18.243 2.305-14.327-8.473-29.747-14.874-45.831-19.025-6.624-1.709-11.252-7.683-11.252-14.524v-22.15c0-9.447-7.687-17.133-17.134-17.133h-32.133c-9.447 0-17.134 7.686-17.134 17.133v22.148c0 6.841-4.628 12.815-11.252 14.524-16.084 4.151-31.504 10.552-45.831 19.025-5.896 3.485-13.401 2.537-18.243-2.305l-15.688-15.689c-6.764-6.772-17.627-6.615-24.224-.007l-22.727 22.726c-6.582 6.574-6.802 17.437-.006 24.225l15.695 15.695c4.842 4.842 5.79 12.348 2.305 18.242-8.473 14.326-14.873 29.746-19.024 45.831-1.71 6.624-7.684 11.251-14.524 11.251h-22.148c-9.447.001-17.134 7.687-17.134 17.134v32.134c0 9.447 7.687 17.133 17.134 17.133h22.147c6.841 0 12.814 4.628 14.524 11.251 4.151 16.085 10.552 31.505 19.024 45.831 3.485 5.894 2.537 13.4-2.305 18.242l-15.689 15.689c-6.782 6.774-6.605 17.634-.006 24.225l22.725 22.725c6.587 6.596 17.451 6.789 24.225.006l15.694-15.695c3.568-3.567 10.991-6.594 18.244-2.304z" />
                             <path
                                 d="m256 367.4c-61.427 0-111.4-49.974-111.4-111.4s49.973-111.4 111.4-111.4 111.4 49.974 111.4 111.4-49.973 111.4-111.4 111.4zm0-192.8c-44.885 0-81.4 36.516-81.4 81.4s36.516 81.4 81.4 81.4 81.4-36.516 81.4-81.4-36.515-81.4-81.4-81.4z" />
-                            </svg>
-                    </button>
+                        </svg>
+                    </span>
                 </form>
             </div>
 
@@ -129,219 +175,185 @@
 
     <section class="items">
         <div class="container">
-            <div class="products">
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            <img src="img/icons/like_empty.svg" alt="like">
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="tv" src="img/items/apple-tv.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Apple TV Gen. 4</h3>
-                        <span>
-                            
-                        <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1bc943" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            <strong>31</strong> left in stock <br> 
-                            Price: <strong>500</strong> $
-                        </span>
-                        <button class="btn">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>77</strong>% Positive reviews <br>
-                            Above avarage
-                        </span>
-                        <span>
-                            <strong>527</strong> <br>
-                            orders
-                        </span>
-                    </div>
-                </div>
+            <div class="all_main">
+                <div id="filter" class="filter">
+                    <span class="filter_name" onclick="filter(this,0)">
+                        <p>Price</p>
 
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            <img src="img/icons/like_empty.svg" alt="like">
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="" src="img/items/11 pro.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Iphone 11 Pro MAX</h3>
-                        <span>
-                            
-                        
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#F05454" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M14.59 8L12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                            <strong>0</strong> left in stock <br> 
-                            Price: <strong>1100</strong> $
+                        <img id="arrow" src="img/icons/arrow_left.svg" alt="">
+                    </span>
+                    <span id="filter_price" class="filter_info">
+                        <span class="filter_info_left">
+                            <p>From</p>
+                            <p>To</p>
                         </span>
-                        <button class="btn_disabled">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>95</strong>% Positive reviews <br>
-                            Above avarage
+                        <span class="filter_info_right">
+                            <input type="text" class="from" onblur="price()" placeholder="min">
+                            <input type="text" class="to" onblur="price()" placeholder="max">
                         </span>
-                        <span>
-                            <strong>1,327</strong> <br>
-                            orders
-                        </span>
-                    </div>
-                </div>
+                    </span>
+                    <span class="filter_name" onclick="filter(this,1)">
+                        <p>Color</p>
 
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            <img src="img/icons/like_empty.svg" alt="like">
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="ipad" src="img/items/ipad-pro.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Ipad PRO 13</h3>
-                        <span>
-                            
-                        <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1bc943" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            <strong>85</strong> left in stock <br> 
-                            Price: <strong>900</strong> $
+                        <img src="img/icons/arrow_left.svg" alt="">
+                    </span>
+                    <span id="filter_color" class="filter_info">
+                        <span class="filter_info_left">
+                            <span> <input type="checkbox" name="" id="" value="Red" onclick="color(this)">red</span>
+                            <span><input type="checkbox" name="" id="" value="Blue" onclick="color(this)">blue</span>
+                            <span><input type="checkbox" name="" id="" value="Black" onclick="color(this)">black</span>
+                            <span> <input type="checkbox" name="" id="" value="Gold" onclick="color(this)">gold</span>
                         </span>
-                        <button class="btn">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>87</strong>% Positive reviews <br>
-                            Above avarage
+                        <span class="filter_info_right">
+                            <span> <input type="checkbox" name="" id="" value="Green" onclick="color(this)">green</span>
+                            <span><input type="checkbox" name="" id="" value="White" onclick="color(this)">white</span>
+                            <span><input type="checkbox" name="" id="" value="Yellow"
+                                    onclick="color(this)">yellow</span>
+                            <span> <input type="checkbox" name="" id="" value="Space Grey"
+                                    onclick="color(this)">grey</span>
                         </span>
-                        <span>
-                            <strong>382</strong> <br>
-                            orders
-                        </span>
-                    </div>
-                </div>
+                    </span>
+                    </span>
+                    <span class="filter_name" onclick="filter(this,2)">
+                        <p>Memory</p>
 
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            <img src="img/icons/like_empty.svg" alt="like">
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="mackbook" src="img/items/macbook pro.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Apple Macbook PRO 16</h3>
-                        <span>
-                            
-                        <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1bc943" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            <strong>274</strong> left in stock <br> 
-                            Price: <strong>1600</strong> $
+                        <img src="img/icons/arrow_left.svg" alt="">
+                    </span>
+                    <span id="filter_memory" class="filter_info">
+                        <span class="filter_info_left">
+                            <span> <input type="checkbox" name="" id="" value="32" onclick="memory(this)">32 gb</span>
+                            <span><input type="checkbox" name="" id="" value="64" onclick="memory(this)">64 gb</span>
+                            <span><input type="checkbox" name="" id="" value="128" onclick="memory(this)">128 gb</span>
+                            <span> <input type="checkbox" name="" id="" value="256" onclick="memory(this)">256 gb</span>
                         </span>
-                        <button class="btn">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>89</strong>% Positive reviews <br>
-                            Above avarage
+                        <span class="filter_info_right">
+                            <span> <input type="checkbox" name="" id="" value="512" onclick="memory(this)">512 gb</span>
+                            <span><input type="checkbox" name="" id="" value="1024" onclick="memory(this)">1 tb</span>
+                            <span><input type="checkbox" name="" id="" value="2048" onclick="memory(this)">2 tb</span>
+                            <span> <input type="checkbox" name="" id="" value="4096" onclick="memory(this)">4 tb</span>
                         </span>
-                        <span>
-                            <strong>485</strong> <br>
-                            orders
-                        </span>
-                    </div>
-                </div>
+                    </span>
+                    </span>
+                    <span class="filter_name" onclick="filter(this,3)">
+                        <p>OS</p>
 
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            <img src="img/icons/like_empty.svg" alt="like">
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="airpods" src="img/items/airpods pro.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Apple AirPods Pro</h3>
-                        <span>
-                            
-                        <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1bc943" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            <strong>999</strong> left in stock <br> 
-                            Price: <strong>299</strong> $
+                        <img src="img/icons/arrow_left.svg" alt="">
+                    </span>
+                    <span id="filter_os" class="filter_info">
+                        <span class="filter_info_left">
+                            <span> <input type="checkbox" name="" id="" value="IOS" onclick="os(this)">IOS</span>
+                            <span><input type="checkbox" name="" id="" value="macOS" onclick="os(this)">Mac OS</span>
+                            <span><input type="checkbox" name="" id="" value="tvOS" onclick="os(this)">Tv OS</span>
+                            <span> <input type="checkbox" name="" id="" value="watchOS" onclick="os(this)">Watch
+                                OS</span>
                         </span>
-                        <button class="btn">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>65</strong>% Positive reviews <br>
-                            Above avarage
-                        </span>
-                        <span>
-                            <strong>296</strong> <br>
-                            orders
-                        </span>
-                    </div>
-                </div>
 
-                <div class="product_item">
-                    <div class="header_product">
-                        <a href="#" class="favorite">
-                            
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none" /><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>
-                        </a>
-                    </div>
-                    <div class="img_product">
-                        <img class="Watch" src="img/items/apple watch.png" alt="tv">
-                    </div>
-                    <div class="content_product">
-                        <h3>Apple Watch 4</h3>
-                        <span>
-                            
-                        <svg class="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1bc943" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                            <strong>483</strong> left in stock <br> 
-                            Price: <strong>599</strong> $
+                    </span>
+                    <span class="filter_name" onclick="filter(this,4)">
+                        <p>Display</p>
+
+                        <img src="img/icons/arrow_left.svg" alt="">
+                    </span>
+                    <span id="filter_display" class="filter_info">
+                        <span class="filter_info_left">
+                            <span> <input type="checkbox" name="" id="" value="2-5" onclick="display(this)">2 - 5
+                                inch</span>
+                            <span><input type="checkbox" name="" id="" value="5-7" onclick="display(this)">5 - 7
+                                inch</span>
+                            <span><input type="checkbox" name="" id="" value="7-12" onclick="display(this)">7 - 12
+                                inch</span>
+                            <span> <input type="checkbox" name="" id="" value="12-16" onclick="display(this)">12 - 16
+                                inch</span>
+                            <span> <input type="checkbox" name="" id="" value="16-100" onclick="display(this)">+16
+                                inch</span>
                         </span>
-                        <button class="btn">
-                            <p>Add to cart</p>
-                        </button>
-                    </div>
-                    <div class="footer_product">
-                        <img class="footer_img" src="img/icons/Like.svg" alt="#">
-                        <span>
-                            <strong>91</strong>% Positive reviews <br>
-                            Above avarage
-                        </span>
-                        <span>
-                            <strong>560</strong> <br>
-                            orders
-                        </span>
+                    </span>
+                </div>
+                <div id="items" class="products">
+
+
+
+                    <div id="card" class="product_item" onclick="mw(this)">
+                        <div class="header_product">
+
+                            <img class="like" id="likes" onclick="like(this)" src="img/icons/like_empty.svg" alt="like">
+
+                        </div>
+                        <div class="nameing" id="nameing">
+                            <div class="img_product">
+                                <img class="img_card" src="" alt="tv">
+                            </div>
+                            <div class="content_product">
+                                <h3>Apple TV Gen. 4</h3>
+                            </div>
+                            <img class="check" src="" alt="#">
+                            <span class="count_in_stock">
+
+                                <strong>31</strong>
+                            </span>
+
+                            <span class="price">
+                                500
+                            </span>
+
+
+                            <button class="btn" id="btn" onclick="buy(this)">
+                                <input type="hidden" class="card_id">
+                                <p>Add to cart</p>
+                            </button>
+
+                        </div>
+
+                        <div class="footer_product">
+                            <img class="footer_img" src="img/icons/Like.svg" alt="#">
+                            <span>
+                                <strong class="percent">77</strong>% Positive reviews <br>
+                                Above avarage
+                            </span>
+                            <span>
+                                <strong class="order">527</strong> <br>
+                                orders
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <div class="modal_window" id="modal_window" onclick="">
+                <div class="modal" id="modal">
+                    <div class="modal_left">
+                        <img class="modal_img" src="items/apple-tv.jpeg" alt="Device image" class="device-img">
+                    </div>
+                    <div class="modal_middle">
+                        <span class="middle_top">Apple TV Gen. 4 2020</span>
+                        <div class="middle_cente">
+                            <img class="like" src="img/icons/like_filled.svg" alt="Like filled icon">
+                            <p><strong class="percent">77</strong>% Positive reviews <br>Above avarage</p>
+                            <p><strong class="order">527</strong><br>orders</p>
+                        </div>
+                        <div class="middle_bottom">
+                            <p><span>Color: </span>Silver,Space Grey</p>
+                            <p><span>Operating System: </span>dfe</p>
+                            <p><span>Chip: </span>A12Z Bionic</p>
+                            <p><span>Height: </span>24.7</p>
+                            <p><span>Width: </span>17.8</p>
+                            <p><span>Depth: </span>0.6</p>
+                            <p><span>Weight: </span>0.470</p>
+                        </div>
+                    </div>
+                    <div class="modal_right">
+                        <span class="modal_price">$ 999</span>
+                        <span class="modal_stock">Stock: <b>32</b> pcs.</span>
+                        <button type="button" class="btn" onclick="buy(this)">
+                            <input type="hidden" class="card_id">Add to cart</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <script src="items.js"></script>
+    <script src="js/items.js"></script>
 </body>
-
+<!--  keydown
+ onblur -->
 
 </html>
