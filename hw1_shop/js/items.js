@@ -1380,6 +1380,7 @@ function rewrite(arr) {
             likes[i].addEventListener("click", (event)=>event.stopPropagation())
         }
     }
+
     if(arr.length==1){
         btn.addEventListener("click", (event)=>event.stopPropagation())
     }
@@ -1718,29 +1719,28 @@ let basket_middle = document.getElementById("basket_middle");
 basketContainer.innerHTML = "";
 
 
-function basket_block(arr_id) {
+function basket_block(arr) {
     basketContainer.innerHTML = "";
-    let arr_add=[]
-
-    let arr=[]
-    for (let i = 0; i < items.length; i++) {
-       if (arr_id.indexOf(items[i].id)>=0) {
-           arr.push(items[i])
-           arr[arr.length-1].count=1
+    // let arr_add=[]
+    let pcs=0
+    let price=0
+    
+    for (let i = 0; i < arr.length; i++) {
+        if(typeof arr[i].count=="undefined"){
+            arr[i].count=1
        }
     }
 
-
     arr.map(basket=>{
-        let flag=false
+        // let flag=false
 
-        for(let i=0;i<arr_add.length;i++){
-            if(basket.id==arr_add[i]){
-                flag=true
-            }
-        }
-        if(flag==true)return
-        else arr_add.push(basket.id)
+        // for(let i=0;i<arr_add.length;i++){
+        //     if(basket.id==arr_add[i]){
+        //         flag=true
+        //     }
+        // }
+        // if(flag==true)return
+        // else arr_add.push(basket.id)
 
         let newBody = document.createElement("div");
         newBody.classList.add("basket_middle")
@@ -1753,32 +1753,32 @@ function basket_block(arr_id) {
 
 
         let basket_price = basket_middle.getElementsByClassName("basket_item_price")
-        basket_price[0].innerHTML="<span>"+"$"+basket.price+"</span>"
-
-        let arrow_basket = basket_middle.getElementsByClassName("arrow_basket")
-        arrow_basket[0].innerHTML += "<input type='hidden' value="+basket.id+">" 
-        // arrow_basket[0].onclick=function(){
-        //     basket.count=basket.count-1
-        //     console.log(basket.count);
-        // }
-        let listener=function(){
-                basket.count=basket.count-1
-                console.log(basket.count);
-            }
-        arrow_basket[0].addEventListener('click',listener,false)
-        arrow_basket[1].innerHTML += "<input type='hidden' value="+basket.id+">"
+        basket_price[0].innerHTML="<span>"+"$"+basket.count*basket.price+"</span>"
 
         let card_id=basket_middle.getElementsByClassName("card_id")
         card_id[0].value=basket.id
+        card_id[1].value=basket.id
+        card_id[2].value=basket.id
         
        let item_quantity =basket_middle.getElementsByClassName("item_quantity")
        item_quantity[0].textContent=basket.count
 
+       
+       pcs+=basket.count
+       price+=basket.count*basket.price
+       
 
         newBody.innerHTML = basket_middle.innerHTML;
         basketContainer.appendChild(newBody);
         
     })
+    let total_pcs=document.getElementsByClassName("total_pcs")
+       let total_price=document.getElementsByClassName("total_price")
+       let total_pcs_top=document.getElementsByClassName("total_pcs_top")
+       
+       total_pcs[0].textContent=pcs
+       total_price[0].textContent=price
+       total_pcs_top[0].textContent=pcs
     // console.log(arr);
 } 
 
@@ -1787,8 +1787,17 @@ function basket_block(arr_id) {
 let basket_buy =[]
 function buy($this) {
     let id=$this.getElementsByClassName("card_id");
-    if (basket_buy.indexOf(Number(id[0].value))== -1) {
-        basket_buy.push(Number(id[0].value))
+
+    for(let i=0;i<basket_buy.length;i++){
+        if(id[0].value==basket_buy[i].id){
+            plus($this)
+            return
+        }
+    }
+
+    for(let i=0;i<items.length;i++){
+        if(id[0].value==items[i].id)
+            basket_buy.push(items[i])
     }
     
     basket_block(basket_buy)
@@ -1796,10 +1805,34 @@ function buy($this) {
 
 function btn_delete($this) {
     let id=$this.getElementsByClassName("card_id")[0].value;
-    if (basket_buy.indexOf(Number(id))!==-1) {
-        basket_buy.splice(basket_buy.indexOf(Number(id)),1)
-    }
-    basket_block(basket_buy)
-    
+    for(let i=0;i<basket_buy.length;i++){
+        if(basket_buy[i].id==id){
+            basket_buy[i].count=1
+            basket_buy.splice(i,1)
+            basket_block(basket_buy)
+            return
+        }
+    }    
 }
 
+function plus($this){
+    let id=$this.getElementsByTagName("input")[0].value
+    for (let i = 0; i < basket_buy.length; i++) {
+        if (basket_buy[i].id==id && basket_buy[i].count<4) {
+          basket_buy[i].count++
+        }
+    }
+
+    basket_block(basket_buy)
+}
+
+function minus($this){
+    let id=$this.getElementsByTagName("input")[0].value
+    for (let i = 0; i < basket_buy.length; i++) {
+        if (basket_buy[i].id==id && basket_buy[i].count>1) {
+          basket_buy[i].count--
+        }
+    }
+
+    basket_block(basket_buy)
+}
