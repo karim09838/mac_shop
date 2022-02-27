@@ -60,9 +60,23 @@ html {
     position: relative;
 }
 
-.top_right::before {
+/* .top_right::before {
     position: absolute;
     content: '3';
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #0E49B5;
+    text-align: center;
+    top: 50%;
+    left: -13px;
+    padding-top: 5px;
+    font-size: 14px;
+} */
+
+.total_pcs_top{
+    position: absolute;
     color: white;
     width: 25px;
     height: 25px;

@@ -21,7 +21,8 @@
                 <div class="top_left">
                     <img src="img/logo.svg" alt="#">
                 </div>
-                <div class="top_right" id="basket" onclick="basket()" >
+                <div class="top_right" id="basket" onclick="basket()">
+                    <span class="total_pcs_top">0</span>
                     <svg class="cart" width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -50,18 +51,20 @@
                         </div>
                         <div class="basket_body" id="basket_body">
                             <div class="basket_middle" id="basket_middle">
-                                <img class="basket_body_img" src="items/airpods_pro.jpg" alt="basket img" >
+                                <img class="basket_body_img" src="items/airpods_pro.jpg" alt="basket img">
                                 <div class="basket_item">
                                     <h3 class="basket_item_title">Apple AirPods Pro</h3>
                                     <p class="basket_item_price"><span>$600</span></p>
                                 </div>
                                 <div class="basket_item_add">
-                                    <span class="arrow_basket">
+                                    <span class="arrow_basket" onclick="minus(this)">
                                         <img class="arrow_left" src="img/icons/arrow_left.svg" alt="Arrow left">
+                                        <input type="hidden" class="card_id">
                                     </span>
                                     <p id="item_quantity" class="item_quantity">3</p>
-                                    <span class="arrow_basket">
+                                    <span class="arrow_basket" onclick="plus(this)">
                                         <img class="arrow_right" src="img/icons/arrow_left.svg" alt="Arrow right">
+                                        <input type="hidden" class="card_id">
                                     </span>
                                 </div>
                                 <span onclick="btn_delete(this)">
@@ -69,15 +72,15 @@
                                     <img class="basket_item_delete" src="img/icons/close-basket.svg" alt="Delete icon">
                                 </span>
                             </div>
-                            
+
                         </div>
                         <div class="basket_footer">
                             <div class="basket_container">
                                 <div class="basket_footer_total">
                                     <p id="basket_footer_total_pcs"><span class="total_am"> Total amount:</span>
-                                        <span><span class="total_pcs">3</span> pcs.</span></p>
+                                        <span><span class="total_pcs">0</span> pcs.</span></p>
                                     <p id="basket_footer_total_price">Total price: <span><span
-                                                class="total_price">600</span>$</span></p>
+                                                class="total_price">0</span>$</span></p>
                                 </div>
                             </div>
                         </div>
